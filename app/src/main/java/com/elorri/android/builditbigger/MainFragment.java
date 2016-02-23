@@ -13,9 +13,9 @@ import com.google.android.gms.ads.AdView;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainFragment extends Fragment {
 
-    public MainActivityFragment() {
+    public MainFragment() {
     }
 
     @Override

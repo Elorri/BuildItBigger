@@ -1,12 +1,13 @@
 package com.elorri.android.builditbigger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
+import com.elorri.android.displayjokes.JokeActivity;
 import com.example.Joke;
 
 public class MainActivity extends ActionBarActivity {
@@ -40,9 +41,11 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(View view){
-
-        Toast.makeText(this, (new Joke()).getJoke(), Toast.LENGTH_SHORT).show();
+    public void launchJokeActivity(View view){
+        Intent intent = new Intent(this, JokeActivity.class);
+        intent.putExtra(JokeActivity.JOKE_KEY, (new Joke()).getJoke());
+        startActivity(intent);
+        //Toast.makeText(this, (new Joke()).getJoke(), Toast.LENGTH_SHORT).show();
     }
 
 
