@@ -25,10 +25,8 @@ dependencies {
     //TODO see if this is needed
     //    testCompile 'junit:junit:4.12'
     // Added for AdMob
-    compile project(':javajokes')
-    compile project(':displayjokes')
-    //compile 'com.google.android.gms:play-services:8.4.0'
     compile project(path: ':backend', configuration: 'android-endpoints')
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.google.android.gms:play-services-ads:8.4.0'
+    compile project(':displayjokes')
 }

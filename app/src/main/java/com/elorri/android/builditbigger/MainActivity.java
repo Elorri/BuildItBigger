@@ -1,16 +1,10 @@
 package com.elorri.android.builditbigger;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.util.Pair;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import com.elorri.android.displayjokes.JokeActivity;
-import com.example.CreateJoke;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -44,11 +38,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void launchJokeActivity(View view){
-        Intent intent = new Intent(this, JokeActivity.class);
-        intent.putExtra(JokeActivity.JOKE_KEY, (new CreateJoke()).getJoke());
-        startActivity(intent);
-        new GoogleCloudEndpointsApiService().execute(new Pair<Context, String>(this, "Manfred"));
-        //Toast.makeText(this, (new CreateJoke()).getJoke(), Toast.LENGTH_SHORT).show();
+        new GoogleCloudEndpointsApiService().execute(this);
     }
 
 
