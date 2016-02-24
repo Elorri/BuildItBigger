@@ -3,14 +3,14 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
-
     defaultConfig {
         applicationId "com.elorri.android.builditbigger"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
+        //multiDexEnabled true
+        testInstrumentationRunner 'android.test.InstrumentationTestRunner'
     }
     buildTypes {
         release {
@@ -18,12 +18,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    //TODO see if this is needed
-    //    testCompile 'junit:junit:4.12'
+    testCompile 'junit:junit:4.12'
     // Added for AdMob
     compile project(path: ':backend', configuration: 'android-endpoints')
     compile 'com.android.support:appcompat-v7:23.1.1'

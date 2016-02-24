@@ -15,8 +15,15 @@ import java.io.IOException;
 /**
  * Created by Elorri on 24/02/2016.
  */
-class GoogleCloudEndpointsApiService extends AsyncTask<Context, Void, String> {
-    private static JokeApi myApiService = null;
+class GCEndpointsApiService extends AsyncTask<Context, Void, String> {
+
+
+
+    private JokeApi myApiService = null;
+
+
+
+    private GCEndpointsApiServiceListener mListener;
     private Context context;
 
     @Override
@@ -53,8 +60,25 @@ class GoogleCloudEndpointsApiService extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        Intent intent = new Intent(context, JokeActivity.class);
-        intent.putExtra(JokeActivity.JOKE_KEY, result);
-        context.startActivity(intent);
+        if (mListener != null) { //means task has been called from the android test
+            mListener.onCompleted(result);
+        } else {
+            //means task has been called from the main activity
+            Intent intent = new Intent(context, JokeActivity.class);
+            intent.putExtra(JokeActivity.JOKE_KEY, result);
+            context.startActivity(intent);// Calling this in android test causes runtime exception
+        }
+    }
+
+
+    //This interface is needed for testing, it will allow the test to know the result of the
+    // AsyncTask
+    public interface GCEndpointsApiServiceListener {
+        void onCompleted(String joke);
+    }
+
+    //This method will only be used for testing purpose
+    public void setListener(GCEndpointsApiServiceListener mListener) {
+        this.mListener = mListener;
     }
 }

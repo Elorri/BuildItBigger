@@ -38,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void launchJokeActivity(View view){
-        new GoogleCloudEndpointsApiService().execute(this);
+        new GCEndpointsApiService().execute(this);
     }
 
 
