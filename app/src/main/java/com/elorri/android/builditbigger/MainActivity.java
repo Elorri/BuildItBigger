@@ -38,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void launchJokeActivity(View view){
-        new GCEndpointsApiService().execute(this);
+        new GCEndpointsApiService(this).execute();
     }
 
 
