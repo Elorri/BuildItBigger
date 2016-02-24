@@ -19,15 +19,23 @@ android {
         }
     }
     productFlavors {
+        free {
+            applicationId = "com.elorri.android.builditbigger.free"
+        }
+        paid {
+            applicationId = "com.elorri.android.builditbigger.paid"
+        }
     }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    // Added for AdMob
+    //testCompile 'junit:junit:4.12'
     compile project(path: ':backend', configuration: 'android-endpoints')
     compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.google.android.gms:play-services-ads:8.4.0'
     compile project(':displayjokes')
+
+    // Added for AdMob
+    freeCompile 'com.google.android.gms:play-services-ads:8.4.0'
+
 }
