@@ -1,6 +1,7 @@
 package com.elorri.android.builditbigger;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
@@ -17,7 +18,7 @@ import java.io.IOException;
 /**
  * Created by Elorri on 24/02/2016.
  */
-class GCEndpointsApiService extends AsyncTask<Void, Void, String> {
+class GCEndpointsApiService extends AsyncTask<Context, Void, String> {
 
 
     private Activity activity;
@@ -40,11 +41,12 @@ class GCEndpointsApiService extends AsyncTask<Void, Void, String> {
     }
 
     @Override
-    protected String doInBackground(Void... params) {
+    protected String doInBackground(Context... params) {
+        Context context=params[0];
         if (myApiService == null) {  // Only do this once
             JokeApi.Builder builder = new JokeApi.Builder(AndroidHttp.newCompatibleTransport(), new
                     AndroidJsonFactory(), null)
-                    .setRootUrl(activity.getResources().getString(R.string.google_app_engine_url));
+                    .setRootUrl(context.getResources().getString(R.string.google_app_engine_url));
             myApiService = builder.build();
 
             // if running in an emulator uncomment those lines
@@ -60,7 +62,6 @@ class GCEndpointsApiService extends AsyncTask<Void, Void, String> {
 //                    });
         }
 
-        // activity = params[0];
 
         try {
             return myApiService.tellaJoke().execute().getJoke();

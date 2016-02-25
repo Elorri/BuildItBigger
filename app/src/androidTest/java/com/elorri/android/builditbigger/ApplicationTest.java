@@ -26,7 +26,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         GCEndpointsApiService task = new GCEndpointsApiService(null);
 
 
-        task.execute();
+        task.execute(getContext());
         task.setListener(new GCEndpointsApiService.GCEndpointsApiServiceListener() {
             @Override
             public void onCompleted(String joke) {

@@ -12,12 +12,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
     }
 
-
     public void launchJokeActivity(View view){
-        new GCEndpointsApiService(this).execute();
+        new GCEndpointsApiService(this).execute(this);
     }
-
-
-
 
 }

@@ -70,7 +70,7 @@ public class MainFragment extends Fragment {
 
 
     private void displayJokeActivity() {
-        new GCEndpointsApiService(getActivity()).execute();
+        new GCEndpointsApiService(getActivity()).execute(getContext());
     }
 
     private void requestNewInterstitial() {
