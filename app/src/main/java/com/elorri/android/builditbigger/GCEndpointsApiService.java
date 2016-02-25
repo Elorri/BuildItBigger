@@ -32,9 +32,11 @@ class GCEndpointsApiService extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPreExecute() {
-        mSpinner=(ProgressBar)activity.findViewById(R.id.progressBar);
-        mSpinner.setVisibility(View.VISIBLE);
-        super.onPreExecute();
+        if (activity != null) { //means we are not in androidTest
+            mSpinner = (ProgressBar) activity.findViewById(R.id.progressBar);
+            mSpinner.setVisibility(View.VISIBLE);
+            super.onPreExecute();
+        }
     }
 
     @Override
@@ -42,12 +44,23 @@ class GCEndpointsApiService extends AsyncTask<Void, Void, String> {
         if (myApiService == null) {  // Only do this once
             JokeApi.Builder builder = new JokeApi.Builder(AndroidHttp.newCompatibleTransport(), new
                     AndroidJsonFactory(), null)
-                    .setRootUrl("https://builditbigger-1231.appspot.com/_ah/api/");
-
+                    .setRootUrl(activity.getResources().getString(R.string.google_app_engine_url));
             myApiService = builder.build();
+
+            // if running in an emulator uncomment those lines
+            // Local App Engine development server lines
+//            JokeApi.Builder builder = new JokeApi.Builder(AndroidHttp.newCompatibleTransport(),
+//                    new AndroidJsonFactory(), null)
+//                    .setRootUrl("http://10.0.2.2:8080/_ah/api/") //10.0 .2 .2 is localhost 's IP address in Android emulator
+//                    .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
+//                        @Override
+//                        public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
+//                            abstractGoogleClientRequest.setDisableGZipContent(true);
+//                        }
+//                    });
         }
 
-       // activity = params[0];
+        // activity = params[0];
 
         try {
             return myApiService.tellaJoke().execute().getJoke();
@@ -58,9 +71,10 @@ class GCEndpointsApiService extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        mSpinner.setVisibility(View.GONE);
+        if (mSpinner != null) //means task has been called from app
+            mSpinner.setVisibility(View.GONE);
 
-        if (mListener != null) { //means task has been called from the android test
+        if (mListener != null) { //means task has been called from the androidTest
             mListener.onCompleted(result);
         } else {
             //means task has been called from the main activity

@@ -21,3 +21,37 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
+//I can't use emulator with my computer, so I was unable to run tests locally, I connect directly to what's deployed on my google app engine.
+//That means I only use connected test and never unit test, that's why I have commented 'testCompile junit:junit:4.12' in the app graddle.
+//To run connected test for all flavor and all connected devices in debug mode this is the task I
+// use.
+task runConnectedTest(dependsOn: ':app:connectedAndroidTest') {
+    println 'connectedAndroidTest'
+}
+
+
+
+//I guess I would do something like this, if I could use the emulator.
+//task startServer(dependsOn: ':backend:appengineRun') {
+//    finalizedBy 'runTest'
+//    println 'startServer'
+//}
+//
+//task runTest(dependsOn: "test") {
+//    finalizedBy 'stopServer'
+//    println 'runTest'
+//}
+//
+//task stopServer(dependsOn: ':backend:appengineStop') {
+//    println 'stopServer'
+//}
+
+// I would also have to change my GCEndpointsApiService by uncommenting the 'Local App Engine
+// development server' lines.
+
+
+// And allow junit tests with 'testCompile junit:junit:4.12' in the app graddle.
+
+

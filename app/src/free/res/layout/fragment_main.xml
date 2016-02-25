@@ -13,20 +13,24 @@
     <TextView
         android:id="@+id/instructions"
         android:text="@string/instructions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"     />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/activity_horizontal_margin"/>
 
     <Button
         android:id="@+id/tellJoke"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/instructions"
+        android:layout_margin="@dimen/activity_horizontal_margin"
         android:text="@string/button_text"/>
 
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:id="@+id/progressBar"
         android:progressDrawable="@drawable/circular_progress_bar"
         android:visibility="invisible"
