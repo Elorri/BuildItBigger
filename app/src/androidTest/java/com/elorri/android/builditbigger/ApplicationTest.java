@@ -23,10 +23,10 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 
     public void testIsGCEResultValid() throws InterruptedException {
         latch = new CountDownLatch(COUNT_LATCH);
-        GCEndpointsApiService task = new GCEndpointsApiService();
+        GCEndpointsApiService task = new GCEndpointsApiService(null);
 
 
-        task.execute(getContext());
+        task.execute();
         task.setListener(new GCEndpointsApiService.GCEndpointsApiServiceListener() {
             @Override
             public void onCompleted(String joke) {
